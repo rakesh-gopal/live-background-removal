@@ -61,6 +61,14 @@ jQuery(function() {
             j = pixIndex(cur.row+dy, cur.col);
             if (j > 0 && isSimilarColor(img, i, j)) {
                 queue.push({row: cur.row+dy, col: cur.col, i: j});
+            }
+            var j = pixIndex(cur.row, cur.col-dx);
+            if (j > 0 && isSimilarColor(img, i, j)) {
+                queue.push({row: cur.row, col: cur.col-dx, i: j});
+            }
+            j = pixIndex(cur.row-dy, cur.col);
+            if (j > 0 && isSimilarColor(img, i, j)) {
+                queue.push({row: cur.row-dy, col: cur.col, i: j});
                
             }
 
@@ -80,8 +88,10 @@ jQuery(function() {
         var imgData = context.getImageData(0, 0, cw, ch);
         var data = imgData.data;
 
-        //growRegion(data, 0, 0);
-        growRegion(data, 0, 0);
+        growRegion(data, 0, 0, 1, 1);
+        growRegion(data, ch-1, cw-1, -1, -1);
+        growRegion(data, ch-1, 0, 1, -1);
+        growRegion(data, 0, cw-1, -1, 1);
 
         // enumerate all pixels
         // each pixel's r,g,b,a datum are stored in separate sequential array elements
