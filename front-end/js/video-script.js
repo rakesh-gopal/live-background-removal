@@ -23,6 +23,9 @@ jQuery(function() {
     }, false);
 
     function pixIndex(row, col) {
+        if (row < 0 || col < 0 || row >= ch || col >= cw) {
+            return -1;
+        }
         return ((row * cw) + col) * 4;
     }
 
@@ -38,7 +41,7 @@ jQuery(function() {
         return Math.abs(iRed-jRed) < nt && Math.abs(iGreen-jGreen) < nt && Math.abs(iBlue-jBlue) < nt;
     }
 
-    function growRegion(img, row, col) {
+    function growRegion(img, row, col, dx, dy) {
         var queue = [];
         var set = {};
         var cur = {row: row, col: col, i: pixIndex(row, col)};
@@ -51,13 +54,13 @@ jQuery(function() {
             img[i + 3] = 0;
             set[i] = true;
 
-            var j = pixIndex(cur.row, cur.col+1);
-            if (cur.col < cw && isSimilarColor(img, i, j)) {
-                queue.push({row: cur.row, col: cur.col + 1, i: j});
+            var j = pixIndex(cur.row, cur.col+dx);
+            if (j > 0 && isSimilarColor(img, i, j)) {
+                queue.push({row: cur.row, col: cur.col + dx, i: j});
             }
-            j = pixIndex(cur.row+1, cur.col);
-            if (cur.row < ch && isSimilarColor(img, i, j)) {
-                queue.push({row: cur.row+1, col: cur.col, i: j});
+            j = pixIndex(cur.row+dy, cur.col);
+            if (j > 0 && isSimilarColor(img, i, j)) {
+                queue.push({row: cur.row+dy, col: cur.col, i: j});
                
             }
 
