@@ -3,31 +3,46 @@
   <head>
     <style>
       body {
-        background: black;
+        background: #999;
         color:#CCCCCC; 
       }
       #c2 {
         background-image: url(media/foo.png);
         background-repeat: no-repeat;
       }
-      div {
-        float: left;
-        border :1px solid #444444;
-        padding:10px;
-        margin: 10px;
-        background:#3B3B3B;
+      div video {
+        opacity: 1.0;
+        position: absolute;
+        top: 10;
+        left: 10;
+      }
+      div canvas {
+        position: absolute;
+        top: 10;
+        left: 10;
+      }
+      div a#btn-play {
+        position: absolute;
+        top: 10;
+        left: 10;
+      }
+      #video-cont {
+        visibility: hidden;
       }
     </style>
   </head>
 
   <body>
+
     <div>
-      <video id="video" src="media/video.mp4" controls="true"/>
+      <div id="video-cont">
+        <video id="mainVideo" src="media/video.mp4" autoplay></video>
+      </div>
+      <canvas id="mainCanvas"></canvas>
+      <a id="btn-play" href="#">Play</a>
     </div>
-    <div>
-      <canvas id="c1" width="160" height="96"></canvas>
-      <canvas id="c2" width="160" height="96"></canvas>
-    </div>
-  <script type="text/javascript" src="js/processor.js"></script>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script type="text/javascript" src="js/video-script.js"></script>
   </body>
 </html>
