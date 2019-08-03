@@ -1,7 +1,7 @@
 var green_ratio_threshold = 0.72;
 var red_blue_ratio = 0.4;
 var blue_red_ratio = 0.6;
-var nt = 3;
+var nt = 5;
 
 jQuery(function() {
 
@@ -83,22 +83,22 @@ jQuery(function() {
         // enumerate all pixels
         // each pixel's r,g,b,a datum are stored in separate sequential array elements
 
-        for (var row = 0; row < ch; row++) {
-            for (var col = 0; col < cw; col++) {
-                var i = pixIndex(row, col)
-                if(data[i + 3] == 0) continue;
-                var i = pixIndex(row, col);
-                var red = data[i];
-                var green = data[i + 1];
-                var blue = data[i + 2];
+        // for (var row = 0; row < ch; row++) {
+        //     for (var col = 0; col < cw; col++) {
+        //         var i = pixIndex(row, col)
+        //         if(data[i + 3] == 0) continue;
+        //         var i = pixIndex(row, col);
+        //         var red = data[i];
+        //         var green = data[i + 1];
+        //         var blue = data[i + 2];
 
-                if (green / (red + blue) > green_ratio_threshold &&
-                    red / blue > red_blue_ratio &&
-                    blue / red > blue_red_ratio) {
-                    data[i + 3] = 0;
-                }
-            }
-        }
+        //         if (green / (red + blue) > green_ratio_threshold &&
+        //             red / blue > red_blue_ratio &&
+        //             blue / red > blue_red_ratio) {
+        //             data[i + 3] = 0;
+        //         }
+        //     }
+        // }
 
         context.putImageData(imgData, 0, 0);
 
