@@ -12,7 +12,6 @@ jQuery(function() {
     var v = document.getElementById('mainVideo');
 
     v.addEventListener("loadedmetadata", function(e) {
-
         cw = canvas.width = v.videoWidth;
         ch = canvas.height = v.videoHeight;
 
@@ -21,6 +20,16 @@ jQuery(function() {
         }, false);
 
     }, false);
+
+    setTimeout(function() {
+        cw = canvas.width = v.videoWidth;
+        ch = canvas.height = v.videoHeight;
+
+        v.addEventListener('play', function() {
+            requestAnimationFrame(animate);
+        }, false);
+
+    }, 1000);
 
     function pixIndex(row, col) {
         if (row < 0 || col < 0 || row >= ch || col >= cw) {
