@@ -28,7 +28,7 @@ def process_vid(url_path, out_id=''):
     mask_face_x = 60
     mask_face_y = 65
     mask_face_height = 95
-    mask = cv2.imread('lib/mask-sm.png', 0)
+    # mask = cv2.imread('lib/mask-sm.png', 0)
 
     last_face = None
 
@@ -61,6 +61,10 @@ def process_vid(url_path, out_id=''):
         if not ret:
             break
 
+        ih, iw, _ = img.shape
+        if iw > 650:
+            img = cv2.resize(img, (650, int(ih/iw*650)))
+
         try:
             # convert to gray scale of each frames
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -74,11 +78,15 @@ def process_vid(url_path, out_id=''):
         if len(faces) > 0:
             face = faces[0]
 
+        for f in faces:
+            if f[2] > face[2]:
+                face = f
+
         if face is not None and last_face is not None:
             (fx, fy, fw, fh) = face
             (lfx, lfy, lfw, lfh) = last_face
-            face = (int((fx*0.2+lfx*0.8)), int((fy*0.2+lfy*0.8)),
-                    int((fw*0.2+lfw*0.8)), int((fh*0.2+lfh*0.8)))
+            face = (int((fx*0.1+lfx*0.9)), int((fy*0.1+lfy*0.9)),
+                    int((fw*0.1+lfw*0.9)), int((fh*0.1+lfh*0.9)))
 
         if face is None:
             face = last_face
@@ -94,9 +102,12 @@ def process_vid(url_path, out_id=''):
             except:
                 continue
 
-        # Display an image in a window
-        # cv2.imshow('img',img)
-        video_out.write(img)
+        try:
+            # Display an image in a window
+            # cv2.imshow('img',img)
+            video_out.write(img)
+        except:
+            continue
 
     # Close the window
     cap.release()

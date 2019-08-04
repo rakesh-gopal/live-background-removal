@@ -19,7 +19,6 @@ jQuery(function() {
             requestAnimationFrame(animate);
         }, false);
 
-        $('#btn-play').show();
     }, false);
 
     setTimeout(function() {
@@ -30,7 +29,6 @@ jQuery(function() {
             requestAnimationFrame(animate);
         }, false);
 
-        $('#btn-play').show();
     }, 1000);
 
     function pixIndex(row, col) {
@@ -103,6 +101,7 @@ jQuery(function() {
         var imgData = context.getImageData(0, 0, cw, ch);
         var data = imgData.data;
 
+        // growRegion(data, 10, 163, 1, 1);
         growRegion(data, 0, 0, 1, 1);
         growRegion(data, 0, cw-1, -1, 1);
 
@@ -129,6 +128,14 @@ jQuery(function() {
         return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
     }  
     
-    // v.src = 'media/video-out' + getQueryStringValue('outid') + '.mp4'
+    setTimeout(function() {
+        var src = 'media/video-out' + getQueryStringValue('outid') + '.mp4'; //'media/video-out.mp4';
+        console.log(src);
+        v.src = src;
+        v.load();
+        setTimeout(function(){
+            $('#btn-play').css({opacity: 1.0});
+        }, 2000)
+    }, 100);
 
 });
