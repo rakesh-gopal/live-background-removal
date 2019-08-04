@@ -1,7 +1,7 @@
 var green_ratio_threshold = 0.72;
 var red_blue_ratio = 0.4;
 var blue_red_ratio = 0.6;
-var nt = 5;
+var nt = 3;
 
 jQuery(function() {
 
@@ -9,7 +9,7 @@ jQuery(function() {
     var context = canvas.getContext("2d");
     var cw, ch;
 
-    var v = document.getElementById('mainVideo');
+    var v = document.getElementById('tutor-video');
 
     v.addEventListener("loadedmetadata", function(e) {
         cw = canvas.width = v.videoWidth;
@@ -19,6 +19,7 @@ jQuery(function() {
             requestAnimationFrame(animate);
         }, false);
 
+        $('#btn-play').show();
     }, false);
 
     setTimeout(function() {
@@ -29,6 +30,7 @@ jQuery(function() {
             requestAnimationFrame(animate);
         }, false);
 
+        $('#btn-play').show();
     }, 1000);
 
     function pixIndex(row, col) {
@@ -46,6 +48,10 @@ jQuery(function() {
         var jRed = img[j];
         var jGreen = img[j + 1];
         var jBlue = img[j + 2];
+
+        if ((iRed == 0 && iGreen == 0 && iBlue == 0) || (jRed == 0 && jGreen == 0 && jBlue == 0)) {
+            return true;
+        }
 
         return Math.abs(iRed-jRed) < nt && Math.abs(iGreen-jGreen) < nt && Math.abs(iBlue-jBlue) < nt;
     }
@@ -98,29 +104,7 @@ jQuery(function() {
         var data = imgData.data;
 
         growRegion(data, 0, 0, 1, 1);
-        growRegion(data, ch-1, cw-1, -1, -1);
-        growRegion(data, ch-1, 0, 1, -1);
         growRegion(data, 0, cw-1, -1, 1);
-
-        // enumerate all pixels
-        // each pixel's r,g,b,a datum are stored in separate sequential array elements
-
-        // for (var row = 0; row < ch; row++) {
-        //     for (var col = 0; col < cw; col++) {
-        //         var i = pixIndex(row, col)
-        //         if(data[i + 3] == 0) continue;
-        //         var i = pixIndex(row, col);
-        //         var red = data[i];
-        //         var green = data[i + 1];
-        //         var blue = data[i + 2];
-
-        //         if (green / (red + blue) > green_ratio_threshold &&
-        //             red / blue > red_blue_ratio &&
-        //             blue / red > blue_red_ratio) {
-        //             data[i + 3] = 0;
-        //         }
-        //     }
-        // }
 
         context.putImageData(imgData, 0, 0);
 
@@ -135,7 +119,10 @@ jQuery(function() {
 
 
     $("#btn-play").click(function() {
+        $('#screencast-cont').css({opacity: 1.0});
         v.play();
+        $('#screencast-video')[0].play();
+        $(this).hide(1000);
     });
 
 });

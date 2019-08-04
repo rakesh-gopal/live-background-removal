@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background: #fff;
+        color:#CCCCCC; 
+        padding-left: 20px;
+        padding-top: 5px;
+      }
+      div video {
+        opacity: 1.0;
+        position: absolute;
+      }
+      div canvas {
+        position: absolute;
+        top: 550px;
+        left: 28px;
+      }
+      #btn-play {
+        position: fixed;
+        top: 350px;
+        left: 550px;
+        display: block;
+        width: 200px;
+        height: 150px;
+        padding: 30px;
+        font-size: 20px;
+        text-decoration: none;
+        color: #1380d0;
+        font-weight: bold;
+        background-color: rgba(19, 128, 208, 0.3);
+        text-align: center;
+        border-radius: 5px;
+      }
+      #btn-play div {
+        padding: 0;
+        font-size: 100px;
+      }
+      #video-cont {
+        opacity: 0;
+      }
+      #screencast-cont {
+        opacity: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div>
+      <img src="img/ua-logo.png"/>
+    </div>
+
+    <div id="screencast-cont">
+        <video id="screencast-video" height="750" src="media/screencast.mp4"></video>
+    </div>
+
+    <div>
+      <div id="video-cont">
+        <video id="tutor-video" width="214" src="media/video-out.mp4"></video>
+      </div>
+      <canvas id="mainCanvas"></canvas>
+
+      <a id="btn-play" href="#">
+        <div>▶</div>
+        Start Course
+      </a>
+
+    </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script type="text/javascript" src="js/video-script.js"></script>
+  </body>
+</html>

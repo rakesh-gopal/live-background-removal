@@ -1,48 +1,47 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Enter URL for video</title>
     <style>
-      body {
-        background: #999;
-        color:#CCCCCC; 
-      }
-      #c2 {
-        background-image: url(media/foo.png);
-        background-repeat: no-repeat;
-      }
-      div video {
-        opacity: 1.0;
-        position: absolute;
-        top: 10;
-        left: 10;
-      }
-      div canvas {
-        position: absolute;
-        top: 10;
-        left: 10;
-      }
-      div a#btn-play {
-        position: absolute;
-        top: 10;
-        left: 10;
-      }
-      #video-cont {
-        visibility: hidden;
-      }
+        body {
+            padding-top: 5px;
+            padding-left: 20px;
+        }
+        #url-cont {
+            margin: 200px auto;
+            text-align: center;
+        }
+        #txt-url {
+            font-size: 18px;
+            height: 40px;
+            padding: 5px;
+            padding-left: 15px;
+            width: 300px;
+            border: solid 1px #1380d0;
+            vertical-align: top;
+        }
+        #btn-submit {
+            height: 40px;
+            padding: 5px;
+            width: 100px;
+            background-color: #1380d0;
+            color: #fff;
+        }
     </style>
-  </head>
-
-  <body>
-
+</head>
+<body>
     <div>
-      <div id="video-cont">
-        <video id="mainVideo" src="media/video-3.mp4"></video>
-      </div>
-      <canvas id="mainCanvas"></canvas>
-      <a id="btn-play" href="#">Play</a>
+      <img src="img/ua-logo.png"/>
     </div>
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-  <script type="text/javascript" src="js/video-script.js"></script>
-  </body>
+    <div id="url-cont">
+        <input type="text" id="txt-url" placeholder="Enter Tutor Video URL"/>
+        <button id="btn-submit">Submit</button>
+    </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/url-script.js"></script>
+</body>
 </html>
