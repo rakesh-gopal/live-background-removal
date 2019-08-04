@@ -1,7 +1,7 @@
 var green_ratio_threshold = 0.72;
 var red_blue_ratio = 0.4;
 var blue_red_ratio = 0.6;
-var nt = 3;
+var nt = 4;
 
 jQuery(function() {
 
@@ -124,5 +124,11 @@ jQuery(function() {
         $('#screencast-video')[0].play();
         $(this).hide(1000);
     });
+
+    function getQueryStringValue (key) {  
+        return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+    }  
+    
+    // v.src = 'media/video-out' + getQueryStringValue('outid') + '.mp4'
 
 });
